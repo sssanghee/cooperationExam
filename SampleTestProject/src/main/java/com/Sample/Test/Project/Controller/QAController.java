@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Sample.Test.Project.Entity.CodeType;
-import com.Sample.Test.Project.Entity.NextQuestParam;
+import com.Sample.Test.Project.Entity.RegisterUser;
 import com.Sample.Test.Project.Service.QAService;
 
 @RestController
@@ -24,6 +24,7 @@ public class QAController {
 	
 	@GetMapping("/getQuestType")
 	public ResponseEntity<List<CodeType>> getQuestType(){ 
+		
 		try {
 			return new ResponseEntity<>(qAService.getQuestList(), HttpStatus.OK);
 		} catch(Exception e) {
@@ -32,37 +33,16 @@ public class QAController {
 		}
 	}
 	
-//	@GetMapping("/getNext/{questId}")
-//	public ResponseEntity<List<Map<String, Object>>> getNextQuest(@PathVariable("questId") String questId){
-//		try {
-//			System.out.println(questId);
-//			return new ResponseEntity<>(qAService.getNextQuest(questId), HttpStatus.OK);
-//		} catch(Exception e) {
-//			e.printStackTrace();
-//			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);			
-//		}
-//	}
-	
-	@PostMapping("/getNext")
-	public ResponseEntity<List<Map<String, Object>>> getNextQuest(@RequestBody NextQuestParam memberInfo){
-		try {
-			System.out.println(memberInfo);
-			return new ResponseEntity<>(qAService.getNextQuest(memberInfo), HttpStatus.OK);
-		} catch(Exception e) {
-			e.printStackTrace();
-			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);			
+	@PostMapping("/registerUser")
+	public ResponseEntity<String> registerUser(@RequestBody RegisterUser params){
+		String result = qAService.registerUser(params);
+		switch(result) {
+			case "success":
+				return new ResponseEntity<>(result, HttpStatus.OK);
+			
+			default:
+				return new ResponseEntity<>(result, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	
-//	@GetMapping("/getPrev/{questId}")
-//	public ResponseEntity<List<Map<String, Object>>> getPrevQuest(@PathVariable("questId") String questId){
-//		try {
-//			System.out.println(questId);
-//			return new ResponseEntity<>(qAService.getPrevQuest(questId), HttpStatus.OK);
-//		} catch(Exception e) {
-//			e.printStackTrace();
-//			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);			
-//		}		
-//	}
+
 }

@@ -15,6 +15,6 @@ import lombok.Setter;
 public class CodeType {
 	
 	@EmbeddedId
-	private CodeTypeEmpId codeTypeEmlId;
+	private CodeTypeKey codeType;
 	
 }

@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 @Embeddable
-public class CodeTypeEmpId implements Serializable {
+public class CodeTypeKey implements Serializable {
 	
 	@Column(name="CODE_TYPE")
 	private String codeType;
