@@ -10,5 +10,5 @@ import com.Sample.Test.Project.Entity.Quest;
 
 @Repository
 public interface QuestRepository extends JpaRepository<Quest, Long>  {
-	Quest findAllByQuestCode(String questCode);
+	Quest findByQuestCode(String questCode);
 }

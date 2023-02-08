@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Sample.Test.Project.Entity.CodeType;
-import com.Sample.Test.Project.Entity.RegisterUser;
+import com.Sample.Test.Project.Entity.Params.RegisterUser;
 import com.Sample.Test.Project.Service.QAService;
 
 @RestController
@@ -29,7 +29,7 @@ public class QAController {
 			return new ResponseEntity<>(qAService.getQuestList(), HttpStatus.OK);
 		} catch(Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);			
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);			
 		}
 	}
 	
@@ -42,6 +42,19 @@ public class QAController {
 			
 			default:
 				return new ResponseEntity<>(result, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@GetMapping("/getNextPrevQuest/{questType}/{questNum}/{prevOrNext}/{userNum}")
+	public ResponseEntity<Map<String, Object>> getPrevNextQuest(@PathVariable String questType,
+																@PathVariable int questNum,
+																@PathVariable String prevOrNext,
+																@PathVariable long userNum){
+		try {
+			return new ResponseEntity<>(qAService.getPrevNextQuest(questType, questNum, prevOrNext, userNum), HttpStatus.OK);
+		} catch(Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 

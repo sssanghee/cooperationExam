@@ -11,12 +11,12 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@Builder
 @Entity
-@Getter
-@Setter
+@Data
+@Builder
 @Table(name="result")
 public class Result {
+	
 	
 	@Id
 	@GeneratedValue
@@ -33,6 +33,9 @@ public class Result {
 	
 	@Column(name="RESULT_URL")
 	private String resultUrl;
+	
+	@Column(name="RESULT01")
+	private String result01;
 	
 	@Column(name="RESULT02")
 	private String result02;
